@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Domain class that stores the user metadata.
@@ -14,5 +18,14 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id; // null when the user has not been created yet
-    // TODO: Implement user domain class. Hint: the @Nullable annotations are important for the Lombok @Data annotation (see https://projectlombok.org/features/Data).
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("UTC")); // set on User creation
+    private LocalDateTime updatedAt = createdAt; // set on User creation and update
+    @NonNull
+    private String loginName;
+    @NonNull
+    private String emailAddress;
+    @NonNull
+    private String firstName;
+    @NonNull
+    private String lastName;
 }

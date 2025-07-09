@@ -13,13 +13,17 @@ import java.util.stream.Collectors;
 
 public class TestFixtures {
     private static final List<Pos> POS_LIST = List.of(
-            new Pos("CrazySheep (RW-I)", "Description 1", PosType.CAFE, CampusType.MAIN, "Andreas-Maisel-Weg", "2", 95445, "Bayreuth"),
-            new Pos("Cafeteria (Mensa)", "Description 1", PosType.CAFE, CampusType.MAIN, "Universitätsstraße", "30", 95447, "Bayreuth"),
-            new Pos("Lidl (Nürnberger Str.)", "Description 1", PosType.VENDING_MACHINE, CampusType.ZAPF, "Nürnberger Str.", "3a", 95448, "Bayreuth")
-    );
+            new Pos("CrazySheep (RW-I)", "Description 1", PosType.CAFE, CampusType.MAIN, "Andreas-Maisel-Weg", "2",
+                    95445, "Bayreuth"),
+            new Pos("Cafeteria (Mensa)", "Description 1", PosType.CAFE, CampusType.MAIN, "Universitätsstraße", "30",
+                    95447, "Bayreuth"),
+            new Pos("Lidl (Nürnberger Str.)", "Description 1", PosType.VENDING_MACHINE, CampusType.ZAPF,
+                    "Nürnberger Str.", "3a", 95448, "Bayreuth"));
 
-    // TODO: fill this list.
-    private static final List<User> USER_LIST = List.of();
+    private static final List<User> USER_LIST = List.of(
+            new User("mrbanan31", "mrbanan@ukr.net", "Anthony", "Black"),
+            new User("bolide31_ukr", "bolide@gmail.com", "Вася", "Пупкін"),
+            new User("jt31_ukr", "hodzhatimur@gmail.com", "Tymur", "Khodzha"));
 
     public static List<Pos> getPosList() {
         return POS_LIST.stream()
@@ -40,7 +44,8 @@ public class TestFixtures {
     }
 
     public static List<User> createUsers(UserService userService) {
-        // TODO: implement this method
-        return List.of();
+        return getUserList().stream()
+                .map(userService::upsert)
+                .collect(Collectors.toList());
     }
 }
